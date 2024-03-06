@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,10 @@ public class PlayerController : MonoBehaviour
     public float turnSpeed;
     public float horizontalInput;
     public float forwardInput;
+    public Camera mainCamera;
+    public Camera hoodCamera;
+    public KeyCode switchKey;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -25,5 +30,11 @@ public class PlayerController : MonoBehaviour
         // We'll move the vehicle forward
         transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardInput);
         transform.Rotate(Vector3.up, turnSpeed * horizontalInput *  Time.deltaTime);
+
+        if(Input.GetKeyDown(switchKey))
+        {
+            mainCamera.enabled = !mainCamera.enabled;
+            hoodCamera.enabled = !hoodCamera.enabled;
+        }
     }
 }
